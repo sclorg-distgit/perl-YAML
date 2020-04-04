@@ -15,11 +15,16 @@
 
 Name:           %{?scl_prefix}perl-YAML
 Version:        1.29
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        YAML Ain't Markup Language (tm)
 License:        GPL+ or Artistic
 URL:            https://metacpan.org/release/YAML
-Source0:        https://cpan.metacpan.org/modules/by-module/YAML/YAML-%{version}.tar.gz
+# Tarball created from https://cpan.metacpan.org/modules/by-module/YAML/YAML-%%{version}.tar.gz
+# using script YAML-free (bug #1813208)
+Source0:        YAML-free-%{version}.tar.gz
+# Script to remove non-free content from upstream tarball
+# Usage: YAML-free YAML-%%{version}.tar.gz
+Source1:        YAML-free
 BuildArch:      noarch
 # Module Build
 BuildRequires:  coreutils
@@ -130,6 +135,9 @@ information on the YAML syntax, please refer to the YAML specification.
 %{_mandir}/man3/YAML::Types.3*
 
 %changelog
+* Fri Mar 13 2020 Paul Howarth <paul@city-fan.org> - 1.29-6
+- Remove non-free test file t/load-slides.t (bug #1813208)
+
 * Thu Jan 02 2020 Jitka Plesnikova <jplesnik@redhat.com> - 1.29-5
 - SCL
 
